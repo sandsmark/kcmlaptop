@@ -27,27 +27,9 @@
 #include <string.h>
 #include <fcntl.h>
 #include <ctype.h>
-#include <sys/stat.h>
-#include <sys/time.h>
-#include <sys/ioctl.h>
-#include <sys/types.h>
 #include <sys/sysmacros.h>
 #include <systemd/sd-bus.h>
 #include "pm.h"
-
-#define BACKWARD_COMPAT 1
-
-/* If PM support of the right version exists in kernel, return zero.
-   Otherwise, return 1 if no support exists, or 2 if it is the wrong
-   version.  *NOTE* The sense of the return value is not intuitive. */
-
-int pm_exists( void )
-{
-   pm_info i;
-   
-   if (access( "/sys/class/power_supply/BAT0", R_OK )) return 1;
-   return pm_read( &i );
-}
 
 /* Read information from /proc/pm.  Return 0 on success, 1 if PM not
    installed, 2 if PM installed, but old version. */
@@ -102,21 +84,31 @@ int pm_read( pm_info *i )
             return 1;
         }
         int voltage = readFile("/sys/class/power_supply/BAT0/voltage_now");
+        if (voltage <= 0) {
+            i->pm_flags = PM_NOT_AVAILABLE;
+            return 1;
+        }
+        voltage /= 1000;
         rate /= voltage;
     }
 
     int energyFull = readFile("/sys/class/power_supply/BAT0/energy_full");
-    int energyNow = readFile("/sys/class/power_supply/BAT0/energy_full");
-    if (energyFull < 0 || energyNow < 0 || rate < 0) {
+    int energyNow = readFile("/sys/class/power_supply/BAT0/energy_now");
+    if (energyFull <= 0 || energyNow <= 0 || rate <= 0) {
         i->pm_flags = PM_NOT_AVAILABLE;
         return 1;
     }
 
-    if (i->ac_line_status) {
-        i->battery_time = energyNow / rate;
+    if (energyNow != energyFull) {
+        if (i->ac_line_status) {
+            i->battery_time = energyNow / rate;
+        } else {
+            i->battery_time = (energyFull - energyNow) / rate;
+        }
     } else {
-        i->battery_time = (energyFull - energyNow) / rate;
+        i->battery_time = 0;
     }
+    i->pm_flags = 0;
 
     return 0;
 }
