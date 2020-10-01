@@ -11,6 +11,7 @@
  * $Id$
  */
 #include "notify.h"
+#include "pm.h"
 
 #include <qlayout.h>
 #include <qlabel.h>
@@ -86,7 +87,7 @@ KBatteryNotify::KBatteryNotify(const int num_new, const int type)
 
 void KBatteryNotify::dosusp()
 {
-	system("exec /usr/bin/pm --suspend");
+    invoke_login_manager("Suspend");
 	accept();
 }
 

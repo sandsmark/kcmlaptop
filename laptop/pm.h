@@ -23,15 +23,6 @@
 
 #include <sys/types.h>
 
-#define PM_PROC   "/proc/pm"
-#define PM_DEVICE "/dev/pm_bios"
-
-#define PM_DEV  "/proc/devices"
-#define PM_NAME "pm_bios"
-
-#ifndef PM_32_BIT_SUPPORT
-#define PM_32_BIT_SUPPORT      0x0002
-#endif
 #ifdef __cplusplus
 extern "C" {
 #endif   
