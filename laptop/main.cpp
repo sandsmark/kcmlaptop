@@ -21,6 +21,7 @@
 
 
 #include <unistd.h>
+#include <stdlib.h>
 #include <kcontrol.h>
 #include "power.h"
 #include "pcmcia.h"
@@ -41,8 +42,8 @@ int has_pm()
 	init = 1;
 	val = 1;
 	pm_no_time=0;
-	pm_info x = {{10*0},0,0,0,0,0,0,0,0,0};
-	if (pm_read(&x) || (x.pm_flags&0x20)) {
+	pm_info x{0, 0, 0, 0};
+	if (pm_read(&x) || (x.pm_flags&pm_info::NOT_AVAILABLE)) {
 		val = 0;
 		pm_no_time = 1;
 	} else {

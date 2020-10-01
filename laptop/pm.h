@@ -21,7 +21,6 @@
  * 
  */
 
-#include <linux/pm_bios.h>
 #include <sys/types.h>
 
 #define PM_PROC   "/proc/pm"
@@ -38,30 +37,18 @@ extern "C" {
 #endif   
 
 typedef struct pm_info {
-   const char driver_version[10];
-   int        pm_version_major;
-   int        pm_version_minor;
+    enum Flags {
+        NOT_AVAILABLE = 0x20
+    };
+
    int        pm_flags;
    int        ac_line_status;
-   int        battery_status;
-   int        battery_flags;
    int        battery_percentage;
    int        battery_time;
-   int        using_minutes;
 } pm_info;
 
 extern int   pm_exists( void );
 extern int   pm_read( pm_info *i );
-extern dev_t pm_dev( void );
-extern int   pm_open( void );
-extern int   pm_close( int fd );
-extern int   pm_get_events( int fd, int timeout, pm_event_t *events, int n );
-extern int   pm_suspend( int fd );
-extern int   pm_standby( int fd );
-extern const char *pm_event_name( pm_event_t event );
-extern const char *pm_time( time_t t );
-extern const char *pm_delta_time( time_t then, time_t now );
-extern const char *pm_time_nosec( time_t t );
 #ifdef __cplusplus
 }
 #endif  
