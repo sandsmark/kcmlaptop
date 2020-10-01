@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<TITLE>The Laptop Control Panel Handbook: The Battery Warning and Critical Panels</TITLE>
+</HEAD>
+<BODY>
+<A HREF="laptop-5.html">Next</A>
+<A HREF="laptop-3.html">Previous</A>
+<A HREF="laptop.html#toc4">Contents</A>
+<HR>
+<H2><A NAME="s4">4. The Battery Warning and Critical Panels</A></H2>
+
+<P>These tabs group together the options that control what happen when a
+pre-determined battery low condition occurs. There are two of them so that you can 
+set a warning for when time is getting close, and something more deperate
+for that last minute save or suspend.
+<P>
+<H2><A NAME="ss4.1">4.1 Low trigger</A>
+</H2>
+
+<P>This field specifies at which point the battery low state is detected - it
+is the number of minutes left (according to APM) in your batteries. When this
+number is crossed the low state is triggered and one or more of the following things will occur
+<P>
+<H2><A NAME="ss4.2">4.2 Run Command</A>
+</H2>
+
+<P>This is a shell command that will be executed when the battery low is detected. 
+By default, this is turned off.
+<P>
+<P>
+<H2><A NAME="ss4.3">4.3 Play Sound</A>
+</H2>
+
+<P>This specifies a sound to play when battery low is detected. As of this version,
+it will only play .wav files. Simply specify the path to the file to have
+it played. By default, this is turned off.
+<P>
+<H2><A NAME="ss4.4">4.4 System Beep</A>
+</H2>
+
+<P>Enabling this will cause Battery to beep whenever the battery level drops below
+the preset value. This is
+probably the least intrusive, yet still active, method of alerting the user
+that the battery is low. By default, this is on.
+<P>
+<H2><A NAME="ss4.5">4.5 Notify</A>
+</H2>
+
+<P>Enabling this will cause Battery to popup a window when the battery becomes low. 
+<P>
+<H2><A NAME="ss4.6">4.6 Suspend</A>
+</H2>
+
+<P>If you have set up /usr/bin/apm to be run setuid (see the instructions for the 'Power' panel)
+then this check box will appear - if checked it will cause your computer to be put into 
+'Suspend' mode.
+<P>
+<H2><A NAME="ss4.7">4.7 Standby</A>
+</H2>
+
+<P>Like 'Suspend' above but it puts your computer into 'Standby' mode.
+<P>
+<HR>
+<A HREF="laptop-5.html">Next</A>
+<A HREF="laptop-3.html">Previous</A>
+<A HREF="laptop.html#toc4">Contents</A>
+</BODY>
+</HTML>

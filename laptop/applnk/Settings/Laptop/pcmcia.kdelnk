@@ -1,0 +1,9 @@
+# KDE Config File
+[KDE Desktop Entry]
+Exec=kcmlaptop pcmcia
+Icon=pcmcia.xpm
+MiniIcon=pcmcia.xpm
+Type=Application
+DocPath=kcontrol/kcmlaptop/laptop-5.html
+Comment=PCMCIA status
+Name=PCMCIA

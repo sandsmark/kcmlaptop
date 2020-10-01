@@ -1,0 +1,10 @@
+# KDE Config File
+[KDE Desktop Entry]
+Name=Laptop
+SortOrder=battery.kdelnk,bwarning.kdelnk,cwarning.kdelnk,power.kdelnk,pcmcia.kdelnk
+Icon=laptop_settings.xpm
+MiniIcon=laptop_settings.xpm
+
+
+
+

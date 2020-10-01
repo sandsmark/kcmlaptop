@@ -1,0 +1,10 @@
+# KDE Config File
+[KDE Desktop Entry]
+Exec=kcmlaptop power
+Icon=power.xpm
+MiniIcon=power.xpm
+Type=Application
+DocPath=kcontrol/kcmlaptop/laptop-6.html
+Comment=Power Control
+Name=Power Control
+Init=kcmlaptop -init

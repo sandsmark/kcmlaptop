@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<TITLE>The Laptop Control Panel Handbook: Questions, Answers, and Tips</TITLE>
+</HEAD>
+<BODY>
+Next
+<A HREF="laptop-7.html">Previous</A>
+<A HREF="laptop.html#toc8">Contents</A>
+<HR>
+<H2><A NAME="s8">8. Questions, Answers, and Tips</A></H2>
+
+<P>
+<P>
+<H2><A NAME="ss8.1">8.1 How do I use my own pixmaps? </A>
+</H2>
+
+<P>Short answer: select them using the setup dialog. Longer answer: Battery searches for its icons in the standard KDE icon path. Currently, this is 
+<P>
+<P>kdedir()/share/toolbar
+kdedir()/share/icons
+$HOME/.kde/share/toolbar
+$HOME/.kde/share/icons
+<P>Where "kdedir()" is usally "/opt/kde" and $HOME is your home directory. If you put your pixmaps in any of these directories (the last one listed is recommended), then the battery monitor should have no problems finding and using them. 
+<P>
+<P>If you plan on docking the battery monitor, you should have a 22x22 (or smaller) version of your pixmap. The name of the small pixmap should be the name of the larger pixmap preceded by "mini-". So if you want to use the default "oldbattery.xpm" pixmap for low battery but want to use your own "mycoolpixmap.xpm" smaller pixmap when it's docked, you should rename your pixmap to "mini-oldbattery.xpm" If you do not do this, the battery monitor will use the large version even in the panel. 
+<P>
+<P>Note that the battery monitor determines its size by the no battery pixmap. So if your pixmap for "no battery" is 100x100, but all the other ones are 32x32... well, the battery monitor will look very strange when the pixmap changes.
+<P>Note - if you create your own icons - be carefull - only the exactly white pixels in the icon get filled by blue by the battery meter - if you want some white looking pixels to stay choose a slightly off-white or grey color for them.
+<P>
+<P>The author claims not to be a graphic artist and would love for someone to donate some prettier looking icons to the cause. 
+<P>
+<P>
+<H2><A NAME="ss8.2">8.2 Why won't Battery Warnings play my dirge.au file?</A>
+</H2>
+
+<P>
+<P>Battery Warning uses the KAudio class to play sounds when the battery level drops below the preset value. Currently,
+this class only supports .wav files. If you wish to play an .au file when the battery gets low,
+try getting the SOX package and put 'play dirge.au' (or just
+'cat dirge.au &gt; /dev/audio') in the Run Command option.
+<P>
+<H2><A NAME="ss8.3">8.3 I have a little battery in the panel strip with a red X through it? </A>
+</H2>
+
+<P>Yup - you do - this indicates that your kernel does not have APM installed - or does not support APM (APM is the bios call set for power management that let the battery monitor find out how much power is available).
+<P>Information about installing the APM package in your kernel can be found at
+<A HREF="http://www.cs.utexas.edu/users/kharker/linux-laptop/apm.html">http://www.cs.utexas.edu/users/kharker/linux-laptop/apm.html</A>
+and in the Battery Powered Linux mini-HOWTO at
+<A HREF="http://metalab.unc.edu/LDP/HOWTO/mini/Battery-Powered.html">http://metalab.unc.edu/LDP/HOWTO/mini/Battery-Powered.html</A>. 
+<P>
+<HR>
+Next
+<A HREF="laptop-7.html">Previous</A>
+<A HREF="laptop.html#toc8">Contents</A>
+</BODY>
+</HTML>

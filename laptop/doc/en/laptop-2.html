@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<TITLE>The Laptop Control Panel Handbook: Installation</TITLE>
+</HEAD>
+<BODY>
+<A HREF="laptop-3.html">Next</A>
+<A HREF="laptop-1.html">Previous</A>
+<A HREF="laptop.html#toc2">Contents</A>
+<HR>
+<H2><A NAME="s2">2. Installation</A></H2>
+
+<P>
+<H2><A NAME="ss2.1">2.1 How to obtain The Laptop Contol panels</A>
+</H2>
+
+<P>
+<P>The most current release version in both source and RH5.2 binary formats can
+always be found at the kcmlaptop homepage. This is at 
+<A HREF="http://www.taniwha.com/laptop">http://www.taniwha.com/laptop</A><P>
+<P>This program replaces the previous 'battery' utility (v0.6 and earlier)
+that I had previously released.
+<P>
+<H2><A NAME="ss2.2">2.2 Requirements</A>
+</H2>
+
+<P>
+<P>In order to successfully compile The Laptop Contol panels, you need at least the 1.1 version
+of KDE. All required libraries can be found on 
+<A HREF="ftp://ftp.kde.org/pub/kde">ftp://ftp.kde.org/pub/kde</A>.
+You must also have the kernel APM package installed in your kernel.
+Usefull information on how to do this can be found at
+<A HREF="http://www.cs.utexas.edu/users/kharker/linux-laptop/apm.html">http://www.cs.utexas.edu/users/kharker/linux-laptop/apm.html</A> and
+in the Battery Powered Linux mini-HOWTO at
+<A HREF="http://metalab.unc.edu/LDP/HOWTO/mini/Battery-Powered.html">http://metalab.unc.edu/LDP/HOWTO/mini/Battery-Powered.html</A>.
+<P>
+<H2><A NAME="ss2.3">2.3 Compilation and Installation</A>
+</H2>
+
+<P>
+<P>Compiling kcmlaptop is very easy. First make sure you have KDE and the QQT
+libraries installed The following should do it:
+<HR>
+<PRE>
+% ./configure
+% make
+% make install
+</PRE>
+<HR>
+<P>If you want the 'suspend' and 'standby' menu commands to work then you should
+install the Linux apmd package (version 2.4 or later). If you want to use
+them from non-root accounts you must mark the 'apm' command 'set uid root'.
+To do this log on as root and enter:
+<HR>
+<PRE>
+        chown root /usr/bin/apm;chmod +s /usr/bin/apm
+</PRE>
+<HR>
+<P>If you had previously installed my battery utility you should uninstall 
+it using the following commands.
+<P>
+<HR>
+<PRE>
+        rm -f /opt/kde/share/applnk/Utilities/battery.kdelnk
+        rm -f /opt/kde/bin/battery
+        rm -rf /opt/kde/share/apps/battery
+</PRE>
+<HR>
+<P>
+<P>That should do it! Should you run into any problems, please report them
+to the 
+<A HREF="mailto:paul@taniwha.com">author</A><P>
+<H2><A NAME="ss2.4">2.4 Using Battery</A>
+</H2>
+
+<P>To enable the laptop utilities open KDE's control panel, click on
+the "Laptop" icon to open the four laptop panels.
+<P>
+<HR>
+<A HREF="laptop-3.html">Next</A>
+<A HREF="laptop-1.html">Previous</A>
+<A HREF="laptop.html#toc2">Contents</A>
+</BODY>
+</HTML>

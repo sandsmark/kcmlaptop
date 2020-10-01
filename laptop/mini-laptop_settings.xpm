@@ -1,0 +1,23 @@
+/* XPM */
+static char * laptop_settings_xpm[] = {
+"16 16 4 1",
+" 	c none",
+".	c #000000000000",
+"X	c #67678D8DFFFF",
+"o	c #CCCCCCCCCCCC",
+"                ",
+"      .         ",
+"     .X.        ",
+"     .XX.       ",
+"    .XXXX.      ",
+"    .XXXXX.     ",
+"    .XXXXX.     ",
+"    .XXXXX.     ",
+"   .o.XXXX.     ",
+"  .o.o.XX.      ",
+" .o.o.o.X.      ",
+"  .o.o.o..      ",
+"   .o.o.o.      ",
+"    .o.o.       ",
+"     .o.        ",
+"      .         "};

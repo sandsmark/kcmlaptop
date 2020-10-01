@@ -1,0 +1,1 @@
+#define LAPTOP_VERSION "0.82"

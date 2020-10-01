@@ -1,0 +1,19 @@
+Begin3
+Title:          kcmlaptop - KDE laptop control panel 
+Version:        0.82
+Entered-date:   11MAR99
+Description:    A KDE control panel for Laptops - 
+		puts a battery meter icon in the control strip, also
+		allows you to set up events to occur when the battery power
+		is running low.
+Keywords:       laptop battery KDE power pcmcia
+Author:         paul@taniwha.com <Paul Campbell>
+Maintained-by:  paul@taniwha.com <Paul Campbell>
+Home-page:      http://www.taniwha.com/~paul
+Primary-site:   http://www.taniwha.com/laptop
+                200k kcmlaptop-0.82.tar.gz
+                60k  kcmlaptop-0.82-1.386.rpm
+                1k   kcmlaptop.lsm
+Platform:       Linux. Needs APM, Qt and KDE
+Copying-policy: GPL
+End

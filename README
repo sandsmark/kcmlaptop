@@ -1,0 +1,37 @@
+ksmlaptop v0.7
+Paul Campbell <paul@taniwha.com>
+
+WHAT?
+-----
+kcmlaptop - laptop control panel for KDE - including battery monitor and suspend control
+
+HOW?
+----
+... do I install it?
+
+   In short:
+
+   % ./configure
+   % make
+   % make install
+
+   Battery uses the standard KDE apps framework so it should compile and
+   install like any other KDE app.  See the INSTALL file for more
+   information.
+
+   Battery should work equally fine with either KDE 1.0 or KDE 1.1.  
+
+   This replaces 'battery' - if you previously installed
+   it remove it be executing:
+
+	rm -f /opt/kde/share/applnk/Utilities/battery.kdelnk
+	rm -f /opt/kde/bin/battery
+	rm -rf /opt/kde/share/apps/battery
+
+BUGS
+----
+I don't know of any - I'm sure they're there - let me know 
+I'll fix them.
+
+Enjoy!
+Paul

@@ -1,0 +1,22 @@
+Version 0.82
+Fixed memory problem that caused crashes is /usr/bin/apm was not setuid root
+Version 0.81
+Fixed memory problem that may have caused some crashes
+Version 0.80
+Added the 'critical battery warning' panel
+Version 0.77
+Minor cosmetic changes
+Version 0.76
+Changed to support more different types of BIOSs
+Version 0.75
+Reduced idle disk traffic
+Version 0.73
+Cleaned up coming out of suspend mode
+Version 0.72
+Fixed problem with 8-bit displays
+Version 0.71
+Minor changes to support different APM BIOSs
+Version 0.7
+Converted to KDE control panel
+Version 0.5
+Initial public version

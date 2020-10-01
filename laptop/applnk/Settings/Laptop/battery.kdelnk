@@ -1,0 +1,10 @@
+# KDE Config File
+[KDE Desktop Entry]
+Exec=kcmlaptop battery
+Icon=laptop_battery.xpm
+MiniIcon=laptop_battery.xpm
+Type=Application
+DocPath=kcontrol/kcmlaptop/laptop-3.html
+Comment=Battery Monitor
+Name=Battery Monitor
+Init=kcmlaptop -init
