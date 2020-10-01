@@ -582,8 +582,8 @@ void KBattery::quit()
 
 void KBattery::checkBatteryNow()
 {
-	pm_info x = {{10*0},0,0,0,0,0,0,0,0,0};
-	if (pm_read(&x) || (x.pm_flags&pm_info::NOT_AVAILABLE)) {
+	pm_info x = {0,0,0,0};
+	if (pm_read(&x) || (x.pm_flags&PM_NOT_AVAILABLE)) {
 		powered = 0;
 		exists=0;
 		val=0;

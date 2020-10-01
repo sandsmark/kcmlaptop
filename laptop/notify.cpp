@@ -74,14 +74,12 @@ KBatteryNotify::KBatteryNotify(const int num_new, const int type)
 	button_layout->addWidget(ok);
 	button_layout->addStretch(1);
 	
-	if (!stat("/usr/bin/pm", &s) && (getuid() == 0 || s.st_mode&S_ISUID)) {
-		QPushButton *susp = new QPushButton(i18n("Suspend Now"), this);
-		susp->setFixedSize(susp->sizeHint());
-		connect(susp, SIGNAL(clicked()), SLOT(dosusp()));
-	
-		button_layout->addWidget(susp);
-		button_layout->addStretch(1);
-	}
+        QPushButton *susp = new QPushButton(i18n("Suspend Now"), this);
+        susp->setFixedSize(susp->sizeHint());
+        connect(susp, SIGNAL(clicked()), SLOT(dosusp()));
+
+        button_layout->addWidget(susp);
+        button_layout->addStretch(1);
 
 	layout->activate();
 }

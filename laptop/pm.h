@@ -35,11 +35,11 @@
 #ifdef __cplusplus
 extern "C" {
 #endif   
+enum Flags {
+    PM_NOT_AVAILABLE = 0x20
+};
 
 typedef struct pm_info {
-    enum Flags {
-        NOT_AVAILABLE = 0x20
-    };
 
    int        pm_flags;
    int        ac_line_status;

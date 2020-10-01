@@ -73,11 +73,11 @@ int pm_read( pm_info *i )
     i->battery_percentage = readFile("/sys/class/power_supply/BAT0/capacity");
 
     if (i->battery_percentage < 0) {
-        i->pm_flags = pm_info::NOT_AVALIABLE;
+        i->pm_flags = PM_NOT_AVAILABLE;
     }
 
     FILE *file = fopen("/sys/class/power_supply/BAT0/status", "rw");
-    char *line = nullptr;
+    char *line = NULL;
     size_t len;
     getline(&line, &len, file);
     fclose(file);
@@ -90,7 +90,7 @@ int pm_read( pm_info *i )
     if (rate < 0) {
         rate = readFile("/sys/class/power_supply/BAT0/power_now");
         if (rate <= 0) {
-            i->pm_flags = pm_info::NOT_AVALIABLE;
+            i->pm_flags = PM_NOT_AVAILABLE;
             return 1;
         }
         int voltage = readFile("/sys/class/power_supply/BAT0/voltage_now");
@@ -100,7 +100,7 @@ int pm_read( pm_info *i )
     int energyFull = readFile("/sys/class/power_supply/BAT0/energy_full");
     int energyNow = readFile("/sys/class/power_supply/BAT0/energy_full");
     if (energyFull < 0 || energyNow < 0 || rate < 0) {
-        i->pm_flags = pm_info::NOT_AVALIABLE;
+        i->pm_flags = PM_NOT_AVAILABLE;
         return 1;
     }
 

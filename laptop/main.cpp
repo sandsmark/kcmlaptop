@@ -43,7 +43,7 @@ int has_pm()
 	val = 1;
 	pm_no_time=0;
 	pm_info x{0, 0, 0, 0};
-	if (pm_read(&x) || (x.pm_flags&pm_info::NOT_AVAILABLE)) {
+	if (pm_read(&x) || (x.pm_flags&PM_NOT_AVAILABLE)) {
 		val = 0;
 		pm_no_time = 1;
 	} else {

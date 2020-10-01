@@ -19,8 +19,9 @@ add_executable(kcmlaptop ${kcmlaptop_SRCS} ${MOC_FILES})
 target_link_libraries(kcmlaptop
     ${KDE1_KDECORE}
     ${KDE1_KDEUI}
+    ${KDE1_KFILE}
+    ${KDE1_MEDIATOOL}
     Qt::Qt1
-    ${X11_LIBRARIES}
 )
 
 install(TARGETS kcmlaptop RUNTIME DESTINATION ${KDE1_BINDIR})
