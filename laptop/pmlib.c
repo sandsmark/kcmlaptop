@@ -32,6 +32,7 @@
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/sysmacros.h>
+#include <systemd/sd-bus.h>
 #include "pm.h"
 
 #define BACKWARD_COMPAT 1
@@ -113,3 +114,32 @@ int pm_read( pm_info *i )
     return 0;
 }
 
+void invoke_login_manager(const char *method)
+{
+    sd_bus *bus = NULL;
+    int ret = sd_bus_open_system(&bus);
+    if (ret < 0) {
+        fprintf(stderr, "Failed to connect to system bus: %s", strerror(-ret));
+        return;
+    }
+
+    sd_bus_error error = SD_BUS_ERROR_NULL;
+    sd_bus_message *dbusRet = NULL;
+    ret = sd_bus_call_method(bus,
+            "org.freedesktop.login1",           /* service to contact */
+            "/org/freedesktop/login1",          /* object path */
+            "org.freedesktop.login1.Manager",   /* interface name */
+            method,                          /* method name */
+            &error,                               /* object to return error in */
+            &dbusRet,                                   /* return message on success */
+            "b",                                 /* input signature */
+            "true");                       /* first argument */
+
+    if (ret < 0) {
+        fprintf(stderr, "Failed to issue method call: %s\n", error.message);
+    }
+
+    sd_bus_error_free(&error);
+    sd_bus_message_unref(dbusRet);
+    sd_bus_unref(bus);
+}

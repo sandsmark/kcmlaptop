@@ -285,12 +285,14 @@ void KBattery::mousePressEvent(QMouseEvent *event)
 
 void KBattery::invokeSuspend()
 {
-	::system("/usr/bin/pm --suspend");
+    // Hibernate? I don't remember old people lingo.
+    invoke_login_manager("Suspend");
 }
 
 void KBattery::invokeStandby()
 {
-	::system("/usr/bin/pm --standby");
+    // dpms?
+    //invoke_login_manager("");
 }
 
 bool KBattery::getExists()

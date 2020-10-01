@@ -49,6 +49,7 @@ typedef struct pm_info {
 
 extern int   pm_exists( void );
 extern int   pm_read( pm_info *i );
+extern void invoke_login_manager(const char *method);
 #ifdef __cplusplus
 }
 #endif  

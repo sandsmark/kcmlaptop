@@ -79,7 +79,7 @@ PowerConfig::PowerConfig (QWidget * parent, const char *name, bool init)
     } else {
      struct stat s;
 
-     if (stat("/usr/bin/pm", &s) || !(getuid() == 0 || s.st_mode&S_ISUID)) 
+     if (false) //stat("/usr/bin/pm", &s) || !(getuid() == 0 || s.st_mode&S_ISUID)) 
 	pm = 0;
      if (!pm) {
       QVBoxLayout *top_layout = new QVBoxLayout(this, 12, 5);
