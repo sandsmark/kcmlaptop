@@ -26,7 +26,14 @@ target_link_libraries(kcmlaptop
 )
 
 install(TARGETS kcmlaptop RUNTIME DESTINATION ${KDE1_BINDIR})
-install(FILES kcmlaptop.kdelnk DESTINATION ${KDE1_APPSDIR}/Utilities)
+install(FILES
+    applnk/Settings/Laptop/.directory
+    applnk/Settings/Laptop/pcmcia.kdelnk
+    applnk/Settings/Laptop/power.kdelnk
+    applnk/Settings/Laptop/battery.kdelnk
+    applnk/Settings/Laptop/bwarning.kdelnk
+    applnk/Settings/Laptop/cwarning.kdelnk
+    DESTINATION ${KDE1_APPSDIR}/Settings/Laptop/)
 install_icon(kcmlaptop.xpm)
 
 install_icon(power.xpm)
@@ -45,13 +52,13 @@ install_icon(laptop_nocharge.xpm)
 install_icon(mini-laptop_nocharge.xpm)
 
 install(FILES
-    laptop-1.html
-    laptop-2.html
-    laptop-3.html
-    laptop-4.html
-    laptop-5.html
-    laptop-6.html
-    laptop-7.html
-    laptop-8.html
-    laptop.html
+    doc/laptop-1.html
+    doc/laptop-2.html
+    doc/laptop-3.html
+    doc/laptop-4.html
+    doc/laptop-5.html
+    doc/laptop-6.html
+    doc/laptop-7.html
+    doc/laptop-8.html
+    doc/laptop.html
     DESTINATION ${KDE1_HTMLDIR}/en/kcontrol/kcmlaptop )
