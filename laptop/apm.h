@@ -1,4 +1,4 @@
-/* apm.h -- Header file for sample APM interface routines
+/* pm.h -- Header file for sample PM interface routines
  * Created: Mon Jan  8 11:40:50 1996 by r.faith@ieee.org
  * Revised: Thu Apr  4 21:57:31 1996 by r.faith@ieee.org
  * Copyright 1996 Rickard E. Faith (r.faith@ieee.org)
@@ -17,51 +17,51 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * 
- * $Id: apm.h,v 1.4 1996/04/05 03:20:38 faith Exp $
+ * $Id: pm.h,v 1.4 1996/04/05 03:20:38 faith Exp $
  * 
  */
 
-#include <linux/apm_bios.h>
+#include <linux/pm_bios.h>
 #include <sys/types.h>
 
-#define APM_PROC   "/proc/apm"
-#define APM_DEVICE "/dev/apm_bios"
+#define PM_PROC   "/proc/pm"
+#define PM_DEVICE "/dev/pm_bios"
 
-#define APM_DEV  "/proc/devices"
-#define APM_NAME "apm_bios"
+#define PM_DEV  "/proc/devices"
+#define PM_NAME "pm_bios"
 
-#ifndef APM_32_BIT_SUPPORT
-#define APM_32_BIT_SUPPORT      0x0002
+#ifndef PM_32_BIT_SUPPORT
+#define PM_32_BIT_SUPPORT      0x0002
 #endif
 #ifdef __cplusplus
 extern "C" {
 #endif   
 
-typedef struct apm_info {
+typedef struct pm_info {
    const char driver_version[10];
-   int        apm_version_major;
-   int        apm_version_minor;
-   int        apm_flags;
+   int        pm_version_major;
+   int        pm_version_minor;
+   int        pm_flags;
    int        ac_line_status;
    int        battery_status;
    int        battery_flags;
    int        battery_percentage;
    int        battery_time;
    int        using_minutes;
-} apm_info;
+} pm_info;
 
-extern int   apm_exists( void );
-extern int   apm_read( apm_info *i );
-extern dev_t apm_dev( void );
-extern int   apm_open( void );
-extern int   apm_close( int fd );
-extern int   apm_get_events( int fd, int timeout, apm_event_t *events, int n );
-extern int   apm_suspend( int fd );
-extern int   apm_standby( int fd );
-extern const char *apm_event_name( apm_event_t event );
-extern const char *apm_time( time_t t );
-extern const char *apm_delta_time( time_t then, time_t now );
-extern const char *apm_time_nosec( time_t t );
+extern int   pm_exists( void );
+extern int   pm_read( pm_info *i );
+extern dev_t pm_dev( void );
+extern int   pm_open( void );
+extern int   pm_close( int fd );
+extern int   pm_get_events( int fd, int timeout, pm_event_t *events, int n );
+extern int   pm_suspend( int fd );
+extern int   pm_standby( int fd );
+extern const char *pm_event_name( pm_event_t event );
+extern const char *pm_time( time_t t );
+extern const char *pm_delta_time( time_t then, time_t now );
+extern const char *pm_time_nosec( time_t t );
 #ifdef __cplusplus
 }
 #endif  

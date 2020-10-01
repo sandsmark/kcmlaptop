@@ -83,7 +83,7 @@ private:
 	QPushButton *buttonBrowsePlaySound;
 	QPushButton *buttonBrowseRunCommand;
 
-	bool	apm, runcommand, playsound, beep, notify, do_suspend, do_standby;
+	bool	pm, runcommand, playsound, beep, notify, do_suspend, do_standby;
 	QString	runcommand_val, low_val, crit_val, sound_val;
 	int		have_time, type;
 };

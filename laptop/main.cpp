@@ -28,10 +28,10 @@
 #include "battery.h"
 #include "daemon.h"
 
-#include "apm.h"
+#include "pm.h"
 
-static int apm_no_time;
-int has_apm()
+static int pm_no_time;
+int has_pm()
 {
 	static int init = 0;
 	static int val;
@@ -40,20 +40,20 @@ int has_apm()
 
 	init = 1;
 	val = 1;
-	apm_no_time=0;
-	apm_info x = {{10*0},0,0,0,0,0,0,0,0,0};
-	if (apm_read(&x) || (x.apm_flags&0x20)) {
+	pm_no_time=0;
+	pm_info x = {{10*0},0,0,0,0,0,0,0,0,0};
+	if (pm_read(&x) || (x.pm_flags&0x20)) {
 		val = 0;
-		apm_no_time = 1;
+		pm_no_time = 1;
 	} else {
-		apm_no_time = x.battery_time < 0;
+		pm_no_time = x.battery_time < 0;
 	}
  	return(val);
 }
 
-int apm_has_time()
+int pm_has_time()
 {
- 	return(!apm_no_time);
+ 	return(!pm_no_time);
 }
 
 
@@ -189,7 +189,7 @@ void KInputApplication::check()
 	should_run |= warning->getStandby();
 	should_run |= power->getPower() != 0;
 	should_run |= power->getNoPower() != 0;
-	if (!has_apm())
+	if (!has_pm())
 		should_run = 0;
 	if (!should_run) {
 		daemon->kill();

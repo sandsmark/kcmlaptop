@@ -71,7 +71,7 @@ private:
 	KIconLoaderButton *buttonNoCharge;
 	KIconLoaderButton *buttonCharge;
 	QString nobattery, nochargebattery, chargebattery; 
-	bool	docked, apm;
+	bool	docked, pm;
 	QString	poll_time;
 };
 

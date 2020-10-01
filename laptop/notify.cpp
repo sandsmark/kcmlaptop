@@ -74,7 +74,7 @@ KBatteryNotify::KBatteryNotify(const int num_new, const int type)
 	button_layout->addWidget(ok);
 	button_layout->addStretch(1);
 	
-	if (!stat("/usr/bin/apm", &s) && (getuid() == 0 || s.st_mode&S_ISUID)) {
+	if (!stat("/usr/bin/pm", &s) && (getuid() == 0 || s.st_mode&S_ISUID)) {
 		QPushButton *susp = new QPushButton(i18n("Suspend Now"), this);
 		susp->setFixedSize(susp->sizeHint());
 		connect(susp, SIGNAL(clicked()), SLOT(dosusp()));
@@ -88,7 +88,7 @@ KBatteryNotify::KBatteryNotify(const int num_new, const int type)
 
 void KBatteryNotify::dosusp()
 {
-	system("exec /usr/bin/apm --suspend");
+	system("exec /usr/bin/pm --suspend");
 	accept();
 }
 

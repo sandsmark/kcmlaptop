@@ -45,7 +45,7 @@
 
 static bool GUI;
 
-int has_apm();
+int has_pm();
 
 PowerConfig::~PowerConfig ()
 {
@@ -62,13 +62,13 @@ PowerConfig::PowerConfig (QWidget * parent, const char *name, bool init)
   else
     GUI = TRUE;
 
-  apm = ::has_apm();
+  pm = ::has_pm();
 
   if (GUI)
-    if (!apm) {
+    if (!pm) {
       QVBoxLayout *top_layout = new QVBoxLayout(this, 12, 5);
 
-      QLabel* explain = new QLabel(i18n("Your computer doesn't have the Linux APM (Advanced\nPower Management) software installed, or doesn't\nhave the APM kernel drivers installed - click the\n'Help' button below for more information on how to\nobtain this software"), this);
+      QLabel* explain = new QLabel(i18n("Your computer doesn't have the Linux PM (Advanced\nPower Management) software installed, or doesn't\nhave the PM kernel drivers installed - click the\n'Help' button below for more information on how to\nobtain this software"), this);
       explain->setMinimumSize(explain->sizeHint());
       top_layout->addWidget(explain, 0);
 
@@ -79,12 +79,12 @@ PowerConfig::PowerConfig (QWidget * parent, const char *name, bool init)
     } else {
      struct stat s;
 
-     if (stat("/usr/bin/apm", &s) || !(getuid() == 0 || s.st_mode&S_ISUID)) 
-	apm = 0;
-     if (!apm) {
+     if (stat("/usr/bin/pm", &s) || !(getuid() == 0 || s.st_mode&S_ISUID)) 
+	pm = 0;
+     if (!pm) {
       QVBoxLayout *top_layout = new QVBoxLayout(this, 12, 5);
 
-      QLabel* explain = new QLabel(i18n("Automatic suspend/standby functionality is only\nenabled if you have installed the apmd package and\nyou have set /usr/bin/apm as setuid root - to do\nthis log on as root and issue the shell command\n'chown root /usr/bin/apm;chmod +s /usr/bin/apm' "), this);
+      QLabel* explain = new QLabel(i18n("Automatic suspend/standby functionality is only\nenabled if you have installed the pmd package and\nyou have set /usr/bin/pm as setuid root - to do\nthis log on as root and issue the shell command\n'chown root /usr/bin/pm;chmod +s /usr/bin/pm' "), this);
       explain->setMinimumSize(explain->sizeHint());
       top_layout->addWidget(explain, 0);
 
@@ -200,7 +200,7 @@ void PowerConfig::resizeEvent(QResizeEvent *)
 
 int  PowerConfig::getNoPower()
 {
-	if (!GUI || !apm || !nopowerOff)
+	if (!GUI || !pm || !nopowerOff)
 		return(nopower);
   if (nopowerOff->isChecked())
     return 0;
@@ -213,7 +213,7 @@ int  PowerConfig::getNoPower()
 
 int  PowerConfig::getPower()
 {
-	if (!GUI || !apm || !powerOff)
+	if (!GUI || !pm || !powerOff)
 		return(power);
   if (powerOff->isChecked())
     return 0;
@@ -227,7 +227,7 @@ int  PowerConfig::getPower()
 // set the slider and LCD values
 void PowerConfig::setPower(int p, int np)
 {
-  if (!apm || nopowerOff == 0)
+  if (!pm || nopowerOff == 0)
 	return;
   nopowerSuspend->setChecked(FALSE);
   nopowerStandby->setChecked(FALSE);

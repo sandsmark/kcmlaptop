@@ -32,7 +32,7 @@
 #include "power.h"
 #include "warning.h"
 #include "battery.h"
-#include "apm.h"
+#include "pm.h"
 
 KBattery::KBattery(PowerConfig *p, BatteryWarning *w, BatteryWarning *c, BatteryConfig *b, QWidget *parent)
 	: QLabel(parent)
@@ -285,12 +285,12 @@ void KBattery::mousePressEvent(QMouseEvent *event)
 
 void KBattery::invokeSuspend()
 {
-	::system("/usr/bin/apm --suspend");
+	::system("/usr/bin/pm --suspend");
 }
 
 void KBattery::invokeStandby()
 {
-	::system("/usr/bin/apm --standby");
+	::system("/usr/bin/pm --standby");
 }
 
 bool KBattery::getExists()
@@ -461,7 +461,7 @@ quit:
 	}
 	char tmp[1024];
 	if (!exists) {
-		sprintf(tmp, i18n("APM not available"));
+		sprintf(tmp, i18n("PM not available"));
 	} else
 	if (powered) {
 		if (val == 100) {
@@ -582,8 +582,8 @@ void KBattery::quit()
 
 void KBattery::checkBatteryNow()
 {
-	apm_info x = {{10*0},0,0,0,0,0,0,0,0,0};
-	if (apm_read(&x) || (x.apm_flags&0x20)) {
+	pm_info x = {{10*0},0,0,0,0,0,0,0,0,0};
+	if (pm_read(&x) || (x.pm_flags&0x20)) {
 		powered = 0;
 		exists=0;
 		val=0;
@@ -655,7 +655,7 @@ void KBattery::popupMenu(int type)
 
 
 
-		if (!stat("/usr/bin/apm", &s) && (getuid() == 0 || s.st_mode&S_ISUID)) {
+		if (!stat("/usr/bin/pm", &s) && (getuid() == 0 || s.st_mode&S_ISUID)) {
 			popup->insertItem(i18n("Setup..."), this, SLOT(setup()));
 			popup->insertSeparator();
 			popup->insertItem(i18n("Standby..."), this, SLOT(invokeStandby()));
@@ -670,7 +670,7 @@ void KBattery::popupMenu(int type)
 
 	} else 
 	if (!exists) {
-		popup->insertItem(i18n("APM Manager Not Found"), this, SLOT(noop()));
+		popup->insertItem(i18n("PM Manager Not Found"), this, SLOT(noop()));
 	} else {
 		if (left < 0) {	// buggy BIOS
 			sprintf(tmp, "%%%d %s", val, i18n("charged"));

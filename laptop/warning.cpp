@@ -72,8 +72,8 @@
 
 static bool GUI;
 
-int has_apm();
-int apm_has_time();
+int has_pm();
+int pm_has_time();
 
 BatteryWarning::~BatteryWarning ()
 {
@@ -95,15 +95,15 @@ BatteryWarning::BatteryWarning (int t, QWidget * parent, const char *name, bool 
 	// setup the tabs
 
 
-  apm = ::has_apm();
+  pm = ::has_pm();
 
   config = kapp->getConfig();
   GetSettings(0);
   if (GUI)
-    if (!apm) {
+    if (!pm) {
       QVBoxLayout *top_layout = new QVBoxLayout(this, 12, 5);
 
-      QLabel* explain = new QLabel(i18n("Your computer doesn't have the Linux APM (Advanced\nPower Management) software installed, or doesn't\nhave the APM kernel drivers installed - click the\n'Help' button below for more information on how to\nobtain this software"), this);
+      QLabel* explain = new QLabel(i18n("Your computer doesn't have the Linux PM (Advanced\nPower Management) software installed, or doesn't\nhave the PM kernel drivers installed - click the\n'Help' button below for more information on how to\nobtain this software"), this);
       explain->setMinimumSize(explain->sizeHint());
       top_layout->addWidget(explain, 0);
 
@@ -183,7 +183,7 @@ BatteryWarning::BatteryWarning (int t, QWidget * parent, const char *name, bool 
 
 	int can_suspend = 1;
 	struct stat s;
-        if (stat("/usr/bin/apm", &s) || !(getuid() == 0 || s.st_mode&S_ISUID)) {
+        if (stat("/usr/bin/pm", &s) || !(getuid() == 0 || s.st_mode&S_ISUID)) {
 		can_suspend = 0;
 		checkSuspend = NULL;
 		checkStandby = NULL;
@@ -209,7 +209,7 @@ BatteryWarning::BatteryWarning (int t, QWidget * parent, const char *name, bool 
         top_layout->addWidget(explain, 0);
 
 	if (!can_suspend) {
-        	QLabel* note = new QLabel(i18n("\nIf you make /usr/bin/apm setuid then you will also\nbe able to choose 'susspend' and 'standby' in the\nabove dialog - check out the help button below to\nfind out how to do this"), this);
+        	QLabel* note = new QLabel(i18n("\nIf you make /usr/bin/pm setuid then you will also\nbe able to choose 'susspend' and 'standby' in the\nabove dialog - check out the help button below to\nfind out how to do this"), this);
         	note->setMinimumSize(note->sizeHint());
         	top_layout->addWidget(note, 0);
 		
@@ -266,11 +266,11 @@ void BatteryWarning::GetSettings( int x )
 		runcommand_val = config->readEntry("RunCommandPath");
 		sound_val = config->readEntry("PlaySoundPath");
 		have_time = config->readNumEntry("HaveTime", 2);
-		if (apm_has_time())
+		if (pm_has_time())
 			have_time = 1;
 	
 	} else
-	if (GUI && apm) {
+	if (GUI && pm) {
 		checkRunCommand->setChecked(runcommand);
 		checkPlaySound->setChecked(playsound);
 		checkBeep->setChecked(beep);
@@ -290,7 +290,7 @@ void BatteryWarning::GetSettings( int x )
 
 void BatteryWarning::saveParams( void )
 {
-    if (GUI && apm) {
+    if (GUI && pm) {
     	runcommand = checkRunCommand->isChecked();
     	playsound = checkPlaySound->isChecked();
     	beep = checkBeep->isChecked();
@@ -340,7 +340,7 @@ void BatteryWarning::defaultSettings()
 	sound_val = "";
 	
 
-	if (GUI && apm) {
+	if (GUI && pm) {
 		checkRunCommand->setChecked(runcommand);
 		checkPlaySound->setChecked(playsound);
 		checkBeep->setChecked(beep);

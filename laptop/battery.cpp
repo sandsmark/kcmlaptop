@@ -72,7 +72,7 @@
 
 static bool GUI;
 
-int has_apm();
+int has_pm();
 
 BatteryConfig::~BatteryConfig ()
 {
@@ -89,13 +89,13 @@ BatteryConfig::BatteryConfig (QWidget * parent, const char *name, bool init)
   else
     GUI = TRUE;
 
-  apm = ::has_apm();
+  pm = ::has_pm();
 
   if (GUI)
-    if (!apm) {
+    if (!pm) {
       QVBoxLayout *top_layout = new QVBoxLayout(this, 12, 5);
 
-      QLabel* explain = new QLabel(i18n("Your computer doesn't have the Linux APM (Advanced\nPower Management) software installed, or doesn't have\nthe APM kernel drivers installed - click the 'Help'\nbutton below for more information on how to obtain\nthis software"), this);
+      QLabel* explain = new QLabel(i18n("Your computer doesn't have the Linux PM (Advanced\nPower Management) software installed, or doesn't have\nthe PM kernel drivers installed - click the 'Help'\nbutton below for more information on how to obtain\nthis software"), this);
       explain->setMinimumSize(explain->sizeHint());
       top_layout->addWidget(explain, 0);
 
@@ -237,7 +237,7 @@ void BatteryConfig::GetSettings( void )
 	nochargebattery = config->readEntry("NoChargePixmap", "laptop_nocharge.xpm");
 	chargebattery = config->readEntry("ChargePixmap", "laptop_charge.xpm");
 
-	if (GUI &&apm) {
+	if (GUI &&pm) {
 		editPoll->setText(poll_time);
 		buttonNoCharge->setIcon(nochargebattery);
 		buttonNoCharge->setPixmap(ICON(nochargebattery));
@@ -253,7 +253,7 @@ void BatteryConfig::GetSettings( void )
 void BatteryConfig::saveParams( void )
 {
 
-	if (GUI && apm) {
+	if (GUI && pm) {
 		poll_time = editPoll->text();
 		docked = checkDock->isChecked();
 		enablemonitor = runMonitor->isChecked();
@@ -293,7 +293,7 @@ void BatteryConfig::defaultSettings()
 	nochargebattery = "laptop_nocharge.xpm";
 	chargebattery = "laptop_charge.xpm";
 
-	if (GUI && apm) {
+	if (GUI && pm) {
 		editPoll->setText(poll_time);
 		buttonNoCharge->setIcon(nochargebattery);
 		buttonNoCharge->setPixmap(ICON(nochargebattery));

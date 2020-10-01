@@ -67,7 +67,7 @@ private:
   QString noedit_wait;
 
   KConfig *config;
-  int power, nopower, apm;
+  int power, nopower, pm;
 };
 
 #endif
