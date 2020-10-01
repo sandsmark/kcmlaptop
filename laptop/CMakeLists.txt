@@ -52,13 +52,13 @@ install_icon(laptop_nocharge.xpm)
 install_icon(mini-laptop_nocharge.xpm)
 
 install(FILES
-    doc/laptop-1.html
-    doc/laptop-2.html
-    doc/laptop-3.html
-    doc/laptop-4.html
-    doc/laptop-5.html
-    doc/laptop-6.html
-    doc/laptop-7.html
-    doc/laptop-8.html
-    doc/laptop.html
+    doc/en/laptop-1.html
+    doc/en/laptop-2.html
+    doc/en/laptop-3.html
+    doc/en/laptop-4.html
+    doc/en/laptop-5.html
+    doc/en/laptop-6.html
+    doc/en/laptop-7.html
+    doc/en/laptop-8.html
+    doc/en/laptop.html
     DESTINATION ${KDE1_HTMLDIR}/en/kcontrol/kcmlaptop )
