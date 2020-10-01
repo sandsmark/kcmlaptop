@@ -103,7 +103,7 @@ BatteryWarning::BatteryWarning (int t, QWidget * parent, const char *name, bool 
     if (!pm) {
       QVBoxLayout *top_layout = new QVBoxLayout(this, 12, 5);
 
-      QLabel* explain = new QLabel(i18n("Your computer doesn't have the Linux PM (Advanced\nPower Management) software installed, or doesn't\nhave the PM kernel drivers installed - click the\n'Help' button below for more information on how to\nobtain this software"), this);
+      QLabel* explain = new QLabel(i18n("Your computer doesn't have battery/power control, or at least not in a recognized form."), this);
       explain->setMinimumSize(explain->sizeHint());
       top_layout->addWidget(explain, 0);
 

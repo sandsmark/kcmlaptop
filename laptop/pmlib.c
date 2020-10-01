@@ -75,9 +75,16 @@ int pm_read( pm_info *i )
 
     if (i->battery_percentage < 0) {
         i->pm_flags = PM_NOT_AVAILABLE;
+        return 1;
     }
 
     FILE *file = fopen("/sys/class/power_supply/BAT0/status", "rw");
+    if (!file) {
+        puts("Failed to open battery status file");
+        i->pm_flags = PM_NOT_AVAILABLE;
+        return 1;
+    }
+
     char *line = NULL;
     size_t len;
     getline(&line, &len, file);
