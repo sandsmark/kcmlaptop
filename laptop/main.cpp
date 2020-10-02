@@ -120,9 +120,6 @@ KInputApplication::KInputApplication(int &argc, char **argv, const char *name)
 
 void KInputApplication::init()
 {
-  sleep(10);	// don't show the docked icon 'till we've be going for a while
-  
-  
   PcmciaConfig *pcmcia = new PcmciaConfig(0, 0, TRUE);
   pcmcia->applySettings();
   delete pcmcia;
