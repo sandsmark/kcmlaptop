@@ -76,37 +76,27 @@ int pm_read( pm_info *i )
     } else {
         i->ac_line_status = 0;
     }
-    int rate = readFile("/sys/class/power_supply/BAT0/current_now"); // fallback
-    if (rate < 0) {
-        rate = readFile("/sys/class/power_supply/BAT0/power_now");
-        if (rate <= 0) {
-            i->pm_flags = PM_NOT_AVAILABLE;
-            return 1;
-        }
-        int voltage = readFile("/sys/class/power_supply/BAT0/voltage_now");
-        if (voltage <= 0) {
-            i->pm_flags = PM_NOT_AVAILABLE;
-            return 1;
-        }
-        voltage /= 1000;
-        rate /= voltage;
-    }
 
-    int energyFull = readFile("/sys/class/power_supply/BAT0/energy_full");
-    int energyNow = readFile("/sys/class/power_supply/BAT0/energy_now");
-    if (energyFull <= 0 || energyNow <= 0 || rate <= 0) {
+    int rate = readFile("/sys/class/power_supply/BAT0/power_now") / 1000;
+    int energyNow = readFile("/sys/class/power_supply/BAT0/energy_now") / 1000;
+    if (energyNow <= 0 || rate <= 0) {
         i->pm_flags = PM_NOT_AVAILABLE;
         return 1;
     }
 
-    if (energyNow != energyFull) {
-        if (i->ac_line_status) {
-            i->battery_time = energyNow / rate;
+    if (i->ac_line_status) {
+        int energyFull = readFile("/sys/class/power_supply/BAT0/energy_full");
+        if (energyFull <= 0) {
+            i->pm_flags = PM_NOT_AVAILABLE;
+            return 1;
+        }
+        if (energyNow != energyFull) {
+            i->battery_time = 3600 * (energyFull - energyNow) / rate;
         } else {
-            i->battery_time = (energyFull - energyNow) / rate;
+            i->battery_time = 0;
         }
     } else {
-        i->battery_time = 0;
+        i->battery_time = 3600 * energyNow / rate;
     }
     i->pm_flags = 0;
 
