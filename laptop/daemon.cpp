@@ -59,9 +59,10 @@ void BatteryDaemon::testrunning()
 		buff[i] = 0;
 		::close(fd);
 		pid = ::atoi(buff);
-		if (::kill(pid, 0) >= 0)
+		if (::kill(pid, 0) >= 0) {
 			running = 1;
-		::sleep(1);
+                    ::sleep(1);
+                }
 		::waitpid(0,0,WNOHANG);
 	}
 }
