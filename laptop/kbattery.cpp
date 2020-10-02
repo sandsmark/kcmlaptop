@@ -657,7 +657,7 @@ void KBattery::popupMenu(int type)
 
 
 
-		if (!stat("/usr/bin/pm", &s) && (getuid() == 0 || s.st_mode&S_ISUID)) {
+		if (true || (!stat("/usr/bin/pm", &s) && (getuid() == 0 || s.st_mode&S_ISUID))) {
 			popup->insertItem(i18n("Setup..."), this, SLOT(setup()));
 			popup->insertSeparator();
 			popup->insertItem(i18n("Standby..."), this, SLOT(invokeStandby()));
