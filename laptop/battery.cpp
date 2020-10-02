@@ -70,6 +70,8 @@
 
 #include "version.h"
 
+#include "pm.h"
+
 static bool GUI;
 
 int has_pm();
@@ -204,8 +206,19 @@ BatteryConfig::BatteryConfig (QWidget * parent, const char *name, bool init)
 	QHBoxLayout *v1 = new QHBoxLayout;
         top_layout->addLayout(v1, 0);
 	v1->addStretch(1);
-	QString s1 = LAPTOP_VERSION;
-	QString s2 = i18n("Version: ")+s1;
+
+        QString s2;
+        pm_info info;
+        if (pm_read(&info) || (info.pm_flags&PM_NOT_AVAILABLE)) {
+            QString s1 = LAPTOP_VERSION;
+            s2 = i18n("Version: ")+s1;
+        } else {
+            QTime timeLeft(info.battery_time/3600, (info.battery_time / 60) % 60, info.battery_time % 60);
+            s2.sprintf("%s, %s left.\nVersion: %s", info.ac_line_status ?
+                    i18n("Plugged in") : i18n("Running on batteries"),
+                    timeLeft.toString().data(),
+                    LAPTOP_VERSION);
+        }
         QLabel* vers = new QLabel(s2, this);
         vers->setMinimumSize(vers->sizeHint());
         v1->addWidget(vers, 0);
