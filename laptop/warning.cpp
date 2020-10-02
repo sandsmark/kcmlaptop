@@ -183,7 +183,7 @@ BatteryWarning::BatteryWarning (int t, QWidget * parent, const char *name, bool 
 
 	int can_suspend = 1;
 	struct stat s;
-        if (stat("/usr/bin/pm", &s) || !(getuid() == 0 || s.st_mode&S_ISUID)) {
+        if (false && (stat("/usr/bin/pm", &s) || !(getuid() == 0 || s.st_mode&S_ISUID))) { // TODO: check if logind is actually availaly
 		can_suspend = 0;
 		checkSuspend = NULL;
 		checkStandby = NULL;
@@ -192,9 +192,10 @@ BatteryWarning::BatteryWarning (int t, QWidget * parent, const char *name, bool 
 		checkSuspend->setMinimumSize(checkSuspend->sizeHint());
 		top_layout->addWidget(checkSuspend);
 
-		checkStandby = new QCheckBox(i18n("Standby"), this);
-		checkStandby->setMinimumSize(checkStandby->sizeHint());
-		top_layout->addWidget(checkStandby);
+		checkStandby = NULL;
+		//checkStandby = new QCheckBox(i18n("Standby"), this);
+		//checkStandby->setMinimumSize(checkStandby->sizeHint());
+		//top_layout->addWidget(checkStandby);
 	}
 
 
