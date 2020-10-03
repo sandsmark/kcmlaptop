@@ -108,9 +108,8 @@ protected:
 	bool    docked, enabled, backoff;
 	unsigned long	power_time;
 	unsigned long	last_time;
-	void	open_interrupts();
-	FILE	*procint;
-	int	poll_interrupts();
+        int idle_seconds;
+	int	poll_idle();
 
 	QString noBatteryIcon;
 	QString chargeIcon;

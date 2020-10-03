@@ -23,6 +23,7 @@ target_link_libraries(kcmlaptop
     ${KDE1_MEDIATOOL}
     Qt::Qt1
     PkgConfig::libsystemd
+    X11::Xss
 )
 
 install(TARGETS kcmlaptop RUNTIME DESTINATION ${KDE1_BINDIR})

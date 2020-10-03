@@ -6,6 +6,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
 
 find_package(KDE1 REQUIRED)
+find_package(X11 REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(libsystemd IMPORTED_TARGET libsystemd)
 

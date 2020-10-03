@@ -27,6 +27,9 @@
 #include <kwm.h>
 #include <qtooltip.h>
 
+// To get user idle time
+#include <X11/extensions/scrnsaver.h>
+
 #include "kbattery.h"
 #include "notify.h"
 #include "power.h"
@@ -66,7 +69,6 @@ KBattery::KBattery(PowerConfig *p, BatteryWarning *w, BatteryWarning *c, Battery
 		} else {
 			power_time = time(0)+60*power->getNoEditWait();
 		}	
-		open_interrupts();
 		timer =  new QTimer( this );
 		connect( timer, SIGNAL(timeout()), this, SLOT(timerDone()) );
 		timer->start( 2*1000, TRUE );                 // 1 seconds single-shot
@@ -102,13 +104,15 @@ void KBattery::timerDone()
 			}	
 		}
 	} else
-	if (poll_interrupts()) {
+            // I have no idea what the guy was trying to do here, but the interrupts polling don't work anymore
+            // I'm assuming he tried to check if the user was active?
+	if (poll_idle()) {
 		if (powered) {
-			power_time = t+60*power->getEditWait();
+			power_time = t+60*power->getEditWait() - idle_seconds;
 		} else {
-			power_time = t+60*power->getNoEditWait();
+			power_time = t+60*power->getNoEditWait() - idle_seconds;
 		}	
-	} else 
+	}
 	if (t >= power_time) {
 		int val;
 
@@ -133,6 +137,14 @@ void KBattery::timerDone()
 	timer->start( 2*1000, TRUE );           // 1 seconds single-shot
 }
 
+int KBattery::poll_idle()
+{
+    XScreenSaverInfo info;
+    XScreenSaverQueryInfo(qt_xdisplay(), DefaultRootWindow(qt_xdisplay()), &info);
+    idle_seconds = info.idle / 1000;
+    return idle_seconds;
+}
+#if 0
 //
 //	boy this is tacky - totally non-portable - but then
 //	this is a Linux specific panel - I did this this way
@@ -201,6 +213,7 @@ void KBattery::open_interrupts()
 	procint = fopen("/proc/interrupts", "r");
 	(void)poll_interrupts();
 }
+#endif
 
 void KBattery::processSetup()
 {
@@ -421,6 +434,13 @@ quit:
 
 	QPixmap q;
 	q.convertFromImage(image);
+        {
+            // Overlay battery percentage
+            QPainter painter(&q);
+            QString text;
+            text.sprintf("%d%%", val);
+            painter.drawText(q.rect(), AlignCenter, text.data());
+        }
 	setPixmap(q);
 	adjustSize();
 	if (left >= 0) {
