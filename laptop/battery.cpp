@@ -254,7 +254,7 @@ void BatteryConfig::GetSettings( void )
 
 	poll_time = config->readEntry("Poll", "20");
 	docked = config->readBoolEntry("Docked", true);
-	enablemonitor = config->readBoolEntry("Enable", false);
+	enablemonitor = config->readBoolEntry("Enable", true);
 
 	nobattery = config->readEntry("NoBatteryPixmap", "laptop_nobattery.xpm");
 	nochargebattery = config->readEntry("NoChargePixmap", "laptop_nocharge.xpm");
