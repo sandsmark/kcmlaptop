@@ -47,6 +47,7 @@ KBattery::KBattery(PowerConfig *p, BatteryWarning *w, BatteryWarning *c, Battery
 	warning = w;
 	critical = c;
 	battery = b;
+        val = 0;
 	triggered[0] = 0;
 	triggered[1] = 0;
 	setAutoResize(true);
