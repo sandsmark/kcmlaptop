@@ -213,10 +213,20 @@ BatteryConfig::BatteryConfig (QWidget * parent, const char *name, bool init)
             QString s1 = LAPTOP_VERSION;
             s2 = i18n("Version: ")+s1;
         } else {
-            QTime timeLeft(info.battery_time/3600, (info.battery_time / 60) % 60, info.battery_time % 60);
-            s2.sprintf("%s, %s left.\nVersion: %s", info.ac_line_status ?
+            QString timeString;
+            if (info.battery_time > 0) {
+                QTime timeLeft(info.battery_time/3600, (info.battery_time / 60) % 60, info.battery_time % 60);
+                timeString = timeLeft.toString() + " left";
+            } else {
+                if (info.ac_line_status) {
+                    timeString = "not charging";
+                } else {
+                    timeString = "";
+                }
+            }
+            s2.sprintf("%s, %s\nVersion: %s", info.ac_line_status ?
                     i18n("Plugged in") : i18n("Running on batteries"),
-                    timeLeft.toString().data(),
+                    timeString.data(),
                     LAPTOP_VERSION);
         }
         QLabel* vers = new QLabel(s2, this);

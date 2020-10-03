@@ -54,30 +54,20 @@ static int readFile(const char *filename)
 int pm_read( pm_info *i )
 {
     i->battery_percentage = readFile("/sys/class/power_supply/BAT0/capacity");
+    i->pm_flags = 0;
 
     if (i->battery_percentage < 0) {
         i->pm_flags = PM_NOT_AVAILABLE;
         return 1;
     }
 
-    FILE *file = fopen("/sys/class/power_supply/BAT0/status", "rw");
-    if (!file) {
-        puts("Failed to open battery status file");
-        i->pm_flags = PM_NOT_AVAILABLE;
-        return 1;
-    }
-
-    char *line = NULL;
-    size_t len;
-    getline(&line, &len, file);
-    fclose(file);
-    if (strcmp(line, "Charging\n") == 0) {
-        i->ac_line_status = 1;
-    } else {
-        i->ac_line_status = 0;
-    }
+    i->ac_line_status = readFile("/sys/class/power_supply/AC/online");
 
     int rate = readFile("/sys/class/power_supply/BAT0/power_now") / 1000;
+    if (rate == 0) {
+        i->battery_time = -1;
+        return 0;
+    }
     int energyNow = readFile("/sys/class/power_supply/BAT0/energy_now") / 1000;
     if (energyNow <= 0 || rate <= 0) {
         i->pm_flags = PM_NOT_AVAILABLE;
