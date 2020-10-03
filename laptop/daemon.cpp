@@ -89,6 +89,9 @@ void BatteryDaemon::start()
 		running = 1;
 		return;
 	}
-	::system("exec kcmlaptop -daemon&");
+        const char *execPath = KApplication::getKApplication()->argv()[0];
+        QString execString;
+        execString.sprintf("exec %s -daemon&", execPath);
+	::system(execString.data());
 	::exit(0);
 }
