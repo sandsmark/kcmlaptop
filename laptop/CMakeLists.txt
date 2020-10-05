@@ -38,19 +38,12 @@ install(FILES
 install_icon(kcmlaptop.xpm)
 
 install_icon(power.xpm)
-install_icon(mini-power.xpm)
 install_icon(pcmcia.xpm)
-install_icon(mini-pcmcia.xpm)
 install_icon(laptop_settings.xpm)
-install_icon(mini-laptop_settings.xpm)
 install_icon(laptop_battery.xpm)
-install_icon(mini-laptop_battery.xpm)
 install_icon(laptop_charge.xpm)
-install_icon(mini-laptop_charge.xpm)
 install_icon(laptop_nobattery.xpm)
-install_icon(mini-laptop_nobattery.xpm)
 install_icon(laptop_nocharge.xpm)
-install_icon(mini-laptop_nocharge.xpm)
 
 install(FILES
     doc/en/laptop-1.html
