@@ -1,8 +1,8 @@
 # KDE Config File
 [KDE Desktop Entry]
 Exec=kcmlaptop critical
-Icon=battery.xpm
-MiniIcon=battery.xpm
+Icon=laptop_nobattery.xpm
+MiniIcon=laptop_nobattery.xpm
 Type=Application
 DocPath=kcontrol/kcmlaptop/laptop-4.html
 Comment=Battery Critical

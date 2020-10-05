@@ -35,6 +35,7 @@ install(FILES
     applnk/Settings/Laptop/bwarning.kdelnk
     applnk/Settings/Laptop/cwarning.kdelnk
     DESTINATION ${KDE1_APPSDIR}/Settings/Laptop/)
+
 install_icon(kcmlaptop.xpm)
 
 install_icon(power.xpm)

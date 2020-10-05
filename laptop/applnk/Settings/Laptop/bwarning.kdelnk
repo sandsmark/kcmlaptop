@@ -1,8 +1,8 @@
 # KDE Config File
 [KDE Desktop Entry]
 Exec=kcmlaptop warning
-Icon=battery.xpm
-MiniIcon=battery.xpm
+Icon=laptop_nocharge.xpm
+MiniIcon=laptop_nocharge.xpm
 Type=Application
 DocPath=kcontrol/kcmlaptop/laptop-4.html
 Comment=Battery Warning
